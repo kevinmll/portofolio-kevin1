@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio Kevin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+    body{scroll-behavior:smooth;background:#f4f6f9;color:#333}
+
+    header{
+      position:fixed;top:0;width:100%;
+      background:#fff;box-shadow:0 2px 5px rgba(0,0,0,0.1);
+      display:flex;justify-content:space-between;align-items:center;
+      padding:10px 20px;z-index:1000
+    }
+
+    .menu-toggle{
+      font-size:26px;color:#007bff;cursor:pointer;border:none;background:none
+    }
+
+    nav{
+      display:none;flex-direction:column;align-items:center;gap:10px;
+      position:absolute;top:60px;right:20px;background:#fff;
+      box-shadow:0 3px 6px rgba(0,0,0,0.1);border-radius:10px;padding:10px 15px;
+      transition:all .3s ease
+    }
+    nav.active{display:flex}
+
+    .menu-btn{
+      background:#007bff;color:#fff;border:none;border-radius:6px;
+      padding:8px 14px;font-weight:500;cursor:pointer;width:100%;transition:.3s
+    }
+    .menu-btn:hover{background:#0056b3}
+
+    section{
+      min-height:100vh;padding:120px 20px 80px;text-align:center;
+      opacity:0;transform:translateY(20px);transition:all .8s ease
+    }
+    section.visible{opacity:1;transform:translateY(0)}
+
+    /* HOME */
+    #home{
+      position:relative;
+      background:url('1.jpg') center/cover no-repeat;
+      display:flex;justify-content:center;align-items:center;
+      flex-direction:column;color:#fff;text-align:center
+    }
+    #home::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(to bottom,rgba(0,123,255,0.7),rgba(123,0,255,0.7));
+      z-index:1
+    }
+    #home .content{position:relative;z-index:2;padding:20px}
+    #home h1{font-size:3em;font-weight:700;margin-bottom:10px;text-shadow:2px 2px 5px rgba(0,0,0,0.5)}
+    #home p{max-width:600px;font-size:1.2em;text-shadow:1px 1px 4px rgba(0,0,0,0.5)}
+
+    /* BACKGROUND UNTUK SEMUA SECTION SELAIN HOME */
+    section:not(#home){
+      background:linear-gradient(to bottom,rgba(0,123,255,0.08),rgba(123,0,255,0.05) 20%,#fff 70%);
+    }
+
+    /* ABOUT */
+    #about h1, #skills h1, #projects h1, #gallery h1, #contact h1 {
+      color:#333;
+      background:linear-gradient(90deg,#007bff,#6f00ff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:30px;
+      font-weight:700;
+    }
+
+    #about img{
+      width:180px;height:180px;border-radius:50%;object-fit:cover;
+      box-shadow:0 6px 12px rgba(0,0,0,0.2);margin:30px 0;
+      border:4px solid rgba(0,123,255,0.4)
+    }
+
+    .biodata{
+      background:#fff;border-radius:12px;padding:25px;
+      box-shadow:0 6px 12px rgba(0,0,0,0.1);
+      max-width:400px;margin:auto;text-align:left;
+      border-top:4px solid #007bff;
+    }
+    .biodata p{margin-bottom:8px}
+
+    /* SKILLS */
+    .skills-list,.projects-list,.gallery-list{
+      display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-top:30px
+    }
+    .skill{
+      background:linear-gradient(135deg,#007BFF,#6f00ff);color:#fff;
+      padding:15px 25px;border-radius:12px;font-weight:600;
+      display:flex;align-items:center;gap:10px;transition:.3s;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    }
+    .skill:hover{transform:scale(1.07);opacity:.9}
+
+    /* PROJECTS */
+    .project{
+      background:#fff;color:#333;width:300px;border-radius:12px;
+      box-shadow:0 6px 12px rgba(0,0,0,0.1);overflow:hidden;transition:.3s;
+      border-top:4px solid #007bff;
+    }
+    .project:hover{transform:translateY(-6px);box-shadow:0 10px 20px rgba(0,0,0,0.15)}
+    .project img{width:100%;height:180px;object-fit:cover}
+    .project p{padding:15px;font-weight:500}
+
+    /* GALLERY */
+    .gallery-item{
+      background:#fff;border-radius:12px;overflow:hidden;
+      box-shadow:0 6px 12px rgba(0,0,0,0.1);width:280px;transition:.3s;
+      border-top:4px solid #6f00ff;
+    }
+    .gallery-item img{width:100%;height:200px;object-fit:cover}
+    .gallery-item:hover{transform:translateY(-6px);box-shadow:0 10px 20px rgba(0,0,0,0.15)}
+
+    /* CONTACT */
+    #contact .contact-list{
+      display:flex;flex-direction:column;align-items:center;
+      gap:15px;margin-top:30px
+    }
+    #contact p{
+      display:flex;align-items:center;gap:10px;
+      background:#fff;padding:12px 18px;border-radius:12px;
+      box-shadow:0 6px 12px rgba(0,0,0,0.1);width:fit-content;
+      transition:.3s;border-top:4px solid #007bff;
+    }
+    #contact p:hover{transform:scale(1.05)}
+    #contact a{color:#333;text-decoration:none;font-weight:500}
+    #contact a:hover{color:#007bff}
+    #contact i{font-size:1.4em;color:#007bff}
+
+    footer{text-align:center;padding:20px;background:#111;color:#fff}
+
+    @media(max-width:768px){
+      #home h1{font-size:2.2em}
+      .biodata{width:90%}
+      .project,.gallery-item{width:90%}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h4 style="color:#007bff;margin:0;">Kevin</h4>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="bi bi-three-dots-vertical"></i></button>
+  <nav id="navMenu">
+    <button class="menu-btn" onclick="scrollToSection('home')"><i class="bi bi-house-door"></i> Home</button>
+    <button class="menu-btn" onclick="scrollToSection('about')"><i class="bi bi-person"></i> Tentang</button>
+    <button class="menu-btn" onclick="scrollToSection('skills')"><i class="bi bi-lightning-charge"></i> Keahlian</button>
+    <button class="menu-btn" onclick="scrollToSection('projects')"><i class="bi bi-laptop"></i> Projek</button>
+    <button class="menu-btn" onclick="scrollToSection('gallery')"><i class="bi bi-camera"></i> Galeri</button>
+    <button class="menu-btn" onclick="scrollToSection('contact')"><i class="bi bi-envelope"></i> Kontak</button>
+  </nav>
+</header>
+
+<section id="home">
+  <div class="content">
+    <h1>Hai, Saya Kevin</h1>
+    <p>Web Developer muda yang fokus di HTML, CSS, JavaScript, dan Laravel. Suka bikin website yang simpel, rapi, dan responsif.</p>
+  </div>
+</section>
+
+<section id="about">
+  <h1>Tentang Saya</h1>
+  <p>Saya siswa SMKN 1 Kawali jurusan RPL. Saya suka belajar hal baru di dunia pemrograman.</p>
+  <img src="pp.jpg" alt="Foto Kevin">
+  <div class="biodata">
+    <p><strong>Nama:</strong> Kevin Adhiana</p>
+    <p><strong>Sekolah:</strong> SMKN 1 Kawali</p>
+    <p><strong>Jurusan:</strong> Rekayasa Perangkat Lunak</p>
+    <p><strong>Kelas:</strong> XII RPL</p>
+    <p><strong>Minat:</strong> Web Development</p>
+  </div>
+</section>
+
+<section id="skills">
+  <h1>Keahlian</h1>
+  <div class="skills-list">
+    <div class="skill"><i class="bi bi-filetype-html"></i> HTML</div>
+    <div class="skill"><i class="bi bi-filetype-css"></i> CSS</div>
+    <div class="skill"><i class="bi bi-filetype-js"></i> JavaScript</div>
+    <div class="skill"><i class="bi bi-filetype-php"></i> PHP</div>
+    <div class="skill"><i class="bi bi-gear"></i> Laravel</div>
+  </div>
+</section>
+
+<section id="projects">
+  <h1>Projek</h1>
+  <div class="projects-list">
+    <div class="project">
+      <img src="motor.jpg" alt="Projek 1">
+      <p>Website Sewa Motor</p>
+    </div>
+    <div class="project">
+      <img src="kasir.jpg" alt="Projek 2">
+      <p>Web Sistem Kasir</p>
+    </div>
+    <div class="project">
+      <img src="siswa.jpg" alt="Projek 3">
+      <p>Aplikasi CRUD Data Siswa</p>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <h1>Galeri</h1>
+  <div class="gallery-list">
+    <div class="gallery-item"><img src="4.jpg" alt="Foto 1"></div>
+    <div class="gallery-item"><img src="5.jpg" alt="Foto 2"></div>
+    <div class="gallery-item"><img src="6.jpg" alt="Foto 3"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h1>Kontak</h1>
+  <div class="contact-list">
+    <p><i class="bi bi-envelope-fill"></i><a href="mailto:kevinadhiana02@gmail.com" target="_blank"> kevinadhiana02@gmail.com</a></p>
+    <p><i class="bi bi-linkedin"></i><a href="https://www.linkedin.com/in/kevin-adhiana-67064238a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"> linkedin.com/in/kevin-adhiana</a></p>
+    <p><i class="bi bi-whatsapp"></i><a href="https://wa.me/6285723616636" target="_blank"> Chat WhatsApp</a></p>
+    <p><i class="bi bi-github"></i><a href="https://github.com/kevinmll" target="_blank"> github.com/kevinmll</a></p>
+  </div>
+</section>
+
+<footer>
+  © 2025 Kevin. All rights reserved.
+</footer>
+
+<script>
+  const sections=document.querySelectorAll('section');
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting)entry.target.classList.add('visible');
+    });
+  },{threshold:.1});
+  sections.forEach(sec=>observer.observe(sec));
+
+  function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+    document.getElementById('navMenu').classList.remove('active');
+  }
+
+  function toggleMenu(){
+    document.getElementById('navMenu').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>
